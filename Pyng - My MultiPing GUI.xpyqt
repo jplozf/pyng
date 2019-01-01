@@ -1,0 +1,41 @@
+<!DOCTYPE XUPProject>
+<!--
+###########################################################################################
+##      Created using Monkey Studio IDE v1.9.0.4 (1.9.0.4)
+##
+##  Author    : jpl@ozf.fr
+##  Project   : Pyng - My MultiPing GUI
+##  FileName  : Pyng - My MultiPing GUI.xpythonqt
+##  Date      : 2018-11-04T14:56:17
+##  License   : GPL
+##  Comment   : Copyright jpl@ozf.fr 2018
+##  Home Page : http://www.ozf.fr/#pyng
+##
+##  This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
+##  WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+##
+###########################################################################################
+-->
+<project version="1.1.0" name="Pyng - My MultiPing GUI">
+    <variable name="XUP.MAIN_FILE">
+        <value>pyng.py</value>
+    </variable>
+    <variable name="FORMS">
+        <file>mainwindow.ui</file>
+        <file>DlgTargetInput.ui</file>
+        <file>DlgSettings.ui</file>
+    </variable>
+    <variable name="PYTHON_FILES">
+        <file>pyng.py</file>
+        <file>mainwindow.py</file>
+        <file>targetWidget.py</file>
+        <file>headerWidget.py</file>
+        <file>icons.py</file>
+        <file>snippets.py</file>
+        <file>DlgTargetInput.py</file>
+        <file>const.py</file>
+        <file>MyLabel.py</file>
+        <file>DlgSettings.py</file>
+        <file>settings.py</file>
+    </variable>
+</project>
