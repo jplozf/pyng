@@ -8,6 +8,8 @@
 - Easily configurable for misc OS version.
 - Could be used as a monitoring tool with mail alerts.
 
+![Main Window](screenshots/main_window_run.png)
+
 ## Getting started
 
 ### Prerequisites
