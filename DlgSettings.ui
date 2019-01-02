@@ -463,6 +463,13 @@
        <item row="1" column="0">
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
+          <widget class="QLabel" name="lblStatusXML">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
           <spacer name="horizontalSpacer_5">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
@@ -529,8 +536,8 @@
       </attribute>
       <layout class="QGridLayout" name="gridLayout_7">
        <item row="0" column="0">
-        <widget class="QWebView" name="webHelp" native="true">
-         <property name="url" stdset="0">
+        <widget class="QWebView" name="webHelp">
+         <property name="url">
           <url>
            <string>about:blank</string>
           </url>

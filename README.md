@@ -22,7 +22,12 @@
 - Binary program packed by PyInstaller could be run as a legacy OS executable.
 
 ### Configuring
-- 
+- As a first try, you should test to ping the **Public DNS** template supplied by default.
+- If the ping fails, you'll have to configure an **alternate ping command** compatible with your OS.
+| OS | Alternate Ping Command | Alternate Ping Regex | Alternate Regex Group | Alternate Codepage |
+| --- | ---------------------- | -------------------- | --------------------- | ------------------ |
+| Windows | ping -n 1 -w 1 | Minimum = (.*)ms, Maximum = (.*)ms, Moyenne = (.*)ms | 1 | windows-1252 |
+| Linux | /bin/ping -c 1 -W 1 | rtt min/avg/max/mdev = (.*)/(.*)/(.*)/(.*) ms | 1 | utf-8 |
 
 ## Built with
 - [Python](https://www.python.org)

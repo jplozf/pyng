@@ -128,7 +128,7 @@ class DlgSettings ( QDialog ):
             xmlFile.write(str(self.txtEditTemplates.toPlainText()))
         self.dirtyFlag = False
         self.lblDirtyFlag.setText("")
-        self.parent.populateTemplatesList()
+        self.lblStatusXML.setText(self.parent.populateTemplatesList())
         
     def changedText(self):
         self.dirtyFlag = True

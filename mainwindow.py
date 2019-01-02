@@ -294,7 +294,6 @@ class MainWindow ( QMainWindow ):
         self.lTargets.setText(" Targets : %5d " % (self.nOrder - 1))
         
     def clearTarget(self, order):
-        #
         thisItem = self.vLayout.itemAt(order)
         self.vLayout.itemAt(order).widget().deleteLater()
         self.vLayout.removeItem(thisItem)
@@ -423,13 +422,16 @@ class MainWindow ( QMainWindow ):
 
     def populateTemplatesList(self):
         self.lstTemplates.clear()
+        statusXML = "OK"
         try:
             tree = ET.parse(const.TEMPLATES_FILE)
             templates = tree.getroot()
             for template in templates:
                 self.lstTemplates.addItem(template.attrib.get("name"))
-        except:
-            self.statusBar.showMessage("ERROR : Templates file not well-formed", settings.db['TIMER_STATUS'])
+        except Exception as e:
+            self.statusBar.showMessage(str(e), settings.db['TIMER_STATUS'])
+            statusXML = str(e)
+        return statusXML
 
     def addTargetsFromTemplate(self, item):
         tree = ET.parse(const.TEMPLATES_FILE)
