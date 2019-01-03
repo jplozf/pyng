@@ -26,6 +26,8 @@
 ### Configuring
 - As a first try, you should test to ping the **Public DNS** template supplied by default.
 - If the ping fails, you'll have to configure an **alternate ping command** compatible with your OS.
+
+#### Alternate ping command
 - As an example of alternate ping commands, here are the commands hardcoded in the program for Windows and Linux OS :
 
 | OS | Alternate Ping Command | Alternate Ping Regex | Alternate Regex Group | Alternate Codepage |
@@ -33,11 +35,18 @@
 | Windows | ping -n 1 -w 1 | Minimum = (.\*)ms, Maximum = (.\*)ms, Moyenne = (.\*)ms | 1 | windows-1252 |
 | Linux | /bin/ping -c 1 -W 1 | rtt min/avg/max/mdev = (.\*)/(.\*)/(.\*)/(.\*) ms | 1 | utf-8 |
 
-- The ping command is how you ping a host from your machine; this command should be configured to get **only one** response (-n 1 for Windows, -c 1 for Linux)
-- The Regex is the output you'll get from the ping command; in this output, each value is contained in a group represented by (.\*) 
-- You'll fetch the value of the ping command from a group by supplied the number of the group containing your value.
+- The **ping command** defines how you ping a host from your machine; this command should be configured to get **only one** response (-n 1 for Windows, -c 1 for Linux)
+- The **regex** defines the output you'll get from the ping command; in this output, each value is contained in a group represented by (.\*) 
+- The goal is to fetch the value of the ping command from a group by supplying the number of the **group** containing your value.
 - As you send only one request, all values (min, max, average) are the same, so you could fetch the group you want.
 - As you could see, my Windows OS is in french, so depending of your version, you should have to change the regex to get the good value.
+- Depending of your OS version, you may also have to change the **codepage**.
+
+![Alternate ping command settings](screenshots/settings_alternate_ping.png)
+
+- All of these settings could be tested toward a specified or default target :
+
+![Alternate ping command test](screenshots/settings_alternate_ping_run.png)
 
 ## Built with
 - [Python](https://www.python.org)
