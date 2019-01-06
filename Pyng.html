@@ -1,24 +1,96 @@
-<!DOCTYPE html
-PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-    <!-- TODO : Create html help file -->
-	<head>
-		<title>PYNG</title>
-	</head>
-	<body>
-		<h1>Alternate ping commands</h1>
-		<h3>Windows</h3>
-		<ul>
-			<li><code>ping -n 1 -w 1 [target]</code></li>
-			<li><code>Minimum = (.*)ms, Maximum = (.*)ms, Moyenne = (.*)ms</code></li>
-		</ul>
-		
-		
-		<h3>Linux</h3>
-		<ul>
-			<li><code>/bin/ping -c 1 -W 1 [target]</code></li>
-			<li><code>rtt min/avg/max/mdev = (.*)/(.*)/(.*)/(.*) ms</code></li>
-		</ul>
-	</body>
-</html>
+<html dir="ltr"><head></head><body contenteditable="true"><h1 id="pyng-my-multiping-gui">PYNG | <em>My MultiPing GUI</em></h1>
+<h2 id="summary">Summary</h2>
+<ul>
+<li>Pyng is a multi ping tool written in Python.</li>
+<li>Cross version (Python 2.x and Python 3.x)</li>
+<li>Cross platform (tested on Linux and Windows)</li>
+<li>Does not need administrator or root access.</li>
+<li>Easily configurable for misc OS version.</li>
+<li>Could be used as a monitoring tool with mail alerts.</li>
+</ul>
+<div class="figure">
+<img src="screenshots/main_window_run.png" alt="Main Window"><p class="caption">Main Window</p>
+</div>
+<h2 id="getting-started">Getting started</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<ul>
+<li>This program is supposed to run under <strong>Windows</strong> <em>(Windows 10 tested)</em> and <strong>Linux</strong> <em>(Ubuntu and Mint tested)</em> OS.</li>
+<li>Both <strong>Python 2.x</strong> and <strong>Python 3.x</strong> are supported.</li>
+<li>The GUI is using <strong>Qt 4.x library PyQt4</strong>.</li>
+<li>Executable packed with <strong>PyInstaller</strong> could be run without installing neither Python nor Qt libraries.</li>
+</ul>
+<h3 id="installing">Installing</h3>
+<ul>
+<li>Copy all the files and directories with structure into a local user place.</li>
+<li>Main entry point for running the program is the <strong>pyng.py</strong> script.</li>
+<li>Binary program packed by PyInstaller could be run as a legacy OS executable.</li>
+</ul>
+<h3 id="configuring">Configuring</h3>
+<ul>
+<li>As a first try, you should test to ping the <strong>Public DNS</strong> template supplied by default.</li>
+<li>If the ping fails, you'll have to configure an <strong>alternate ping command</strong> compatible with your OS.</li>
+</ul>
+<h4 id="alternate-ping-command">Alternate ping command</h4>
+<ul>
+<li>As an example of alternate ping commands, here are the commands hardcoded in the program for Windows and Linux OS :</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th align="left">OS</th>
+<th align="left">Alternate Ping Command</th>
+<th align="left">Alternate Ping Regex</th>
+<th align="center">Alternate Regex Group</th>
+<th align="left">Alternate Codepage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Windows</td>
+<td align="left">ping -n 1 -w 1</td>
+<td align="left">Minimum = (.*)ms, Maximum = (.*)ms, Moyenne = (.*)ms</td>
+<td align="center">1</td>
+<td align="left">windows-1252</td>
+</tr>
+<tr class="even">
+<td align="left">Linux</td>
+<td align="left">/bin/ping -c 1 -W 1</td>
+<td align="left">rtt min/avg/max/mdev = (.*)/(.*)/(.*)/(.*) ms</td>
+<td align="center">1</td>
+<td align="left">utf-8</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The <strong>ping command</strong> defines how you ping a host from your machine; this command should be configured to get <strong>only one</strong> response (-n 1 for Windows, -c 1 for Linux)</li>
+<li>The <strong>regex</strong> defines the output you'll get from the ping command; in this output, each value is contained in a group represented by (.*)</li>
+<li>The goal is to fetch the value of the ping command from a group by supplying the number of the <strong>group</strong> containing your value.</li>
+<li>As you send only one request, all values (min, max, average) are the same, so you could fetch the group you want.</li>
+<li>As you could see, my Windows OS is in french, so depending of your version, you should have to change the regex to get the good value.</li>
+<li>Depending of your OS version, you may also have to change the <strong>codepage</strong>.</li>
+</ul>
+<div class="figure">
+<img src="screenshots/settings_alternate_ping.png" alt="Alternate ping command settings"><p class="caption">Alternate ping command settings</p>
+</div>
+<ul>
+<li>All of these settings could be tested toward a specified or default target :</li>
+</ul>
+<div class="figure">
+<img src="screenshots/settings_alternate_ping_run.png" alt="Alternate ping command test"><p class="caption">Alternate ping command test</p>
+</div>
+<h2 id="built-with">Built with</h2>
+<ul>
+<li><a href="https://www.python.org">Python</a></li>
+<li><a href="https://pypi.org/project/PyQt4/">PyQt4 library</a></li>
+<li>smtplib library</li>
+<li><a href="http://www.axialis.com/free/icons">Axialis free icons library</a> by <a href="http://www.axialis.com">Axialis Team</a></li>
+</ul>
+<h2 id="authors">Authors</h2>
+<ul>
+<li>Main developper : <strong>Jean-Pierre Liguori</strong></li>
+</ul>
+<h2 id="license">License</h2>
+<ul>
+<li>This project is licensed under the GNU General Public License - see the <a href="LICENSE.md">LICENSE.md</a> file for details</li>
+</ul>
+</body></html>

@@ -48,6 +48,28 @@
 
 ![Alternate ping command test](screenshots/settings_alternate_ping_run.png)
 
+- The output panel is then showing you what has been understood.
+- If the answer in the output panel seems to be correct, don't forget to enable this alternate ping command.
+
+#### Triggers settings
+
+![Triggers settings](screenshots/settings_triggers.png)
+
+- The **ping timer interval** is the duration between two consecutive ping requests in milliseconds.
+- The **statusbar message timer** is the length of time the message remains displayed in the statusbar.
+- The **dead target after xx unreachable ping** defines after how many timeout requests, the target is declared dead. This value is taken into account when sending alert emails.
+- The **triggers values for ping status** 
+
+#### SMTP settings
+
+![SMTP settings](screenshots/settings_smtp_config.png)
+
+#### Templates
+
+![Templates editing](screenshots/settings_templates_edit.png)
+
+![Templates editing in error](screenshots/settings_templates_edit_no_good.png)
+
 ## Built with
 - [Python](https://www.python.org)
 - [PyQt4 library](https://pypi.org/project/PyQt4/)

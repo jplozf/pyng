@@ -333,36 +333,50 @@ class targetWidget( QWidget ):
         
         
     def pingMe(self):
-        # TODO : manage alternate ping command
-        # Windows
-        if os.name == "nt":
-            args=['ping', '-n', '1', '-w', '1', str(self.targetIP)]
-            p_ping = subprocess.Popen(args, shell=False, stdout=subprocess.PIPE, creationflags = 0x08000000)
+        if settings.db['ALT_PING_ENABLED'] == True:
+            args = settings.db['ALT_PING_COMMAND'].split()
+            args.append(str(self.targetIP))
+            if os.name == "nt":
+                p_ping = subprocess.Popen(args, shell=False, stdout=subprocess.PIPE, creationflags = 0x08000000)
+            else:
+                p_ping = subprocess.Popen(args, shell=False, stdout=subprocess.PIPE)
             # save ping stdout
             p_ping_out = p_ping.communicate()[0]
             if (p_ping.wait() == 0):
-                # Minimum = 19ms, Maximum = 19ms, Moyenne = 19ms
                 if sys.version_info[0] < 3:
-                    search = re.search(r'Minimum = (.*)ms, Maximum = (.*)ms, Moyenne = (.*)ms',p_ping_out, re.M|re.I)
+                    search = re.search(settings.db['ALT_PING_REGEX'],p_ping_out, re.M|re.I)
                 else:
-                    search = re.search(r'Minimum = (.*)ms, Maximum = (.*)ms, Moyenne = (.*)ms',p_ping_out.decode('windows-1252'), re.M|re.I)
-                ping_rtt = search.group(2)
-        # Linux
+                    search = re.search(settings.db['ALT_PING_REGEX'],p_ping_out.decode(settings.db['ALT_PING_CODEPAGE']), re.M|re.I)
+                ping_rtt = search.group(int(settings.db['ALT_REGEX_GROUP']))
         else:
-            args=['/bin/ping', '-c', '1', '-W', '1', str(self.targetIP)]
-            p_ping = subprocess.Popen(args, shell=False, stdout=subprocess.PIPE)
-            # save ping stdout
-            p_ping_out = p_ping.communicate()[0]
-            if (p_ping.wait() == 0):
-                # rtt min/avg/max/mdev = 22.293/22.293/22.293/0.000 ms
-                if sys.version_info[0] < 3:
-                    search = re.search(r'rtt min/avg/max/mdev = (.*)/(.*)/(.*)/(.*) ms',p_ping_out, re.M|re.I)
-                else:
-                    search = re.search(r'rtt min/avg/max/mdev = (.*)/(.*)/(.*)/(.*) ms',p_ping_out.decode('windows-1252'), re.M|re.I)
-                ping_rtt = search.group(2)        
-        self.tick = self.tick + 1
+            # Windows
+            if os.name == "nt":
+                args = ['ping', '-n', '1', '-w', '1', str(self.targetIP)]
+                p_ping = subprocess.Popen(args, shell=False, stdout=subprocess.PIPE, creationflags = 0x08000000)
+                # save ping stdout
+                p_ping_out = p_ping.communicate()[0]
+                if (p_ping.wait() == 0):
+                    # Minimum = 19ms, Maximum = 19ms, Moyenne = 19ms
+                    if sys.version_info[0] < 3:
+                        search = re.search(r'Minimum = (.*)ms, Maximum = (.*)ms, Moyenne = (.*)ms',p_ping_out, re.M|re.I)
+                    else:
+                        search = re.search(r'Minimum = (.*)ms, Maximum = (.*)ms, Moyenne = (.*)ms',p_ping_out.decode('windows-1252'), re.M|re.I)
+                    ping_rtt = search.group(2)
+            # Linux
+            else:
+                args=['/bin/ping', '-c', '1', '-W', '1', str(self.targetIP)]
+                p_ping = subprocess.Popen(args, shell=False, stdout=subprocess.PIPE)
+                # save ping stdout
+                p_ping_out = p_ping.communicate()[0]
+                if (p_ping.wait() == 0):
+                    # rtt min/avg/max/mdev = 22.293/22.293/22.293/0.000 ms
+                    if sys.version_info[0] < 3:
+                        search = re.search(r'rtt min/avg/max/mdev = (.*)/(.*)/(.*)/(.*) ms',p_ping_out, re.M|re.I)
+                    else:
+                        search = re.search(r'rtt min/avg/max/mdev = (.*)/(.*)/(.*)/(.*) ms',p_ping_out.decode('windows-1252'), re.M|re.I)
+                    ping_rtt = search.group(2)        
         
-        # FIX THIS
+        self.tick = self.tick + 1        
         try:
             self.pingValue = int(float(ping_rtt))
         except:
